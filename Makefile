@@ -1,9 +1,28 @@
 
 NAME = push_swap
 
-SRCS = src/algorithm.c src/push_swap.c
+OBJ_DIR = obj
 
-OBJS = ${SRCS:.c=.o}
+SRCS =  $(wildcard src/*.c)
 
-CC = CC
-CFLAGS = -Wall -Wextra -Werror
+OBJ = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -Iinclude
+
+$(OBJ_DIR)/%.o: src/%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+all: ${NAME}
+
+${NAME}: ${OBJ}
+	${CC} ${CFLAGS} ${OBJ} -o ${NAME}
+
+clean:
+	rm -f ${OBJ}
+
+fclean: clean
+	rm -f ${NAME}
+
+re: fclean all
