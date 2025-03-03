@@ -1,45 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:38:59 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/02/20 21:41:18 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/03 10:15:01 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int is_sorted(t_node *stack)
+int	is_sorted(t_node *stack)
 {
-    while (stack && stack->next)
-    {
-        if (stack->value > stack->next->value)
-            return 0;
-        stack = stack->next;
-    }
-    return 1;
+	while (stack && stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
-void print_stack(t_node *stack)
+void	print_stack(t_node *stack)
 {
-    while (stack)
-    {
-        printf("%d ", stack->value);
-        stack = stack->next;
-    }
-    printf("\n");
+	while (stack)
+	{
+		printf("%d ", stack->value);
+		stack = stack->next;
+	}
+	printf("\n");
 }
 
-void free_stack(t_node *stack)
+void	free_stack(t_node *stack)
 {
-    t_node *tmp;
-    while (stack)
-    {
-        tmp = stack;
-        stack = stack->next;
-        free(tmp);
-    }
+    t_node	*tmp;
+	while (stack)
+	{
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
+	}
+}
+
+int	get_distance(t_node *stack, int value)
+{
+	int	distance;
+
+	distance = 0;
+	while (stack)
+	{
+		if (stack->index == value)
+			return (distance);
+		stack = stack->next;
+		distance++;
+	}
+	return (-1);
 }
