@@ -12,17 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-int	is_sorted(t_node *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
 void	print_stack(t_node *stack)
 {
 	while (stack)
@@ -57,4 +46,14 @@ int	get_distance(t_node *stack, int value)
 		distance++;
 	}
 	return (-1);
+}
+
+t_node	*new_node(int value)
+{
+    t_node	*node = malloc(sizeof(t_node));
+	if (!node)
+		return NULL;
+	node->value = value;
+	node->next = NULL;
+	return (node);
 }

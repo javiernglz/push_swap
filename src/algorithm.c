@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:01:28 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/03 10:20:00 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:13:57 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void sort_3(t_node **t_node_a)
     int min = get_min(*t_node_a, -1);
     int next_min = get_min(*t_node_a, min);
 
-    if (is_sorted(*t_node_a))
+    if (is_stack_sorted(*t_node_a))
         return;
     if ((*t_node_a)->index == min && (*t_node_a)->next->index != next_min)
     {
@@ -90,7 +90,7 @@ void small_sort(t_node **t_node_a, t_node **t_node_b)
 {
     int size = stack_size(*t_node_a);
 
-    if (is_sorted(*t_node_a) || size <= 1)
+    if (is_stack_sorted(*t_node_a) || size <= 1)
         return;
     if (size == 2)
         sa(t_node_a);
