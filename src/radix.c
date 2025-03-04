@@ -6,51 +6,36 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:51:38 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/03 10:19:04 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:44:39 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	normalized_indice(t_node *stack, int size)
+static int get_max_bits(t_node *stack)
 {
-	int *arr = malloc(size * sizeof(int));
-	if (!arr)
-		return;
-	t_node *tmp = stack;
-	for (int i = 0; i < size; i++)
-	{
-		arr[i] = tmp->value;
-		tmp = tmp->next;
-	}
+    t_node *head;
+    int max;
+    int max_bits;
 
-	for (int i = 0; i < size - 1; i++)
-	{
-		for (int j = i + 1; j < size; j++)
-		{
-			if (arr[i] > arr[j])
-			{
-				int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
+    if (!stack)
+        return (0);
 
-    tmp = stack;
-    while (tmp)
+    head = stack;
+    max = head->index;
+    max_bits = 0;
+    
+    while (head)
     {
-        for (int i = 0; i < size; i++)
-        {
-            if (tmp->value == arr[i])
-            {
-                tmp->index = i; //asignamos el índice
-                break;
-            }
-        }
-        tmp = tmp->next;
+        if (head->index > max)
+            max = head->index;
+        head = head->next;
     }
-    free(arr);
+    
+    while ((max >> max_bits) != 0)
+        max_bits++;
+    
+    return (max_bits);
 }
 
 int	is_stack_sorted(t_node *stack)
@@ -64,29 +49,31 @@ int	is_stack_sorted(t_node *stack)
     return (1);
 }
 
-void	radix_sort(t_stack *stack, int size)
+void	radix_sort(t_node **stack_a, t_node **stack_b)
 {
-    int bit_size = 0;
-    int max_num = size - 1;
+	t_node	*head_a;
+	int		i;
+	int		j;
+	int		size;
+	int		max_bits;
 
-    while (max_num > 0)
-    {
-        bit_size++;
-        max_num >>= 1;
-    }
-
-    for (int j = 0; j < bit_size; j++)
-    {
-        int i = size;
-        while (i--)
-        {
-            if (((stack->a->index >> j) & 1) == 0)
-                pb(&stack->a, &stack->b);
-            else
-                ra(&stack->a);
-        }
-
-        while (stack->b)
-            pa(&stack->a, &stack->b);
-    }
+	i = 0;
+	head_a = *stack_a;
+	size = ft_lstsize(head_a);
+	max_bits = get_max_bits(stack_a);
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j++ < size)
+		{
+			head_a = *stack_a;
+			if (((head_a->index >> i) & 1) == 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+		}
+		while (ft_lstsize(*stack_b) != 0)
+			pa(stack_a, stack_b);
+		i++;
+	}
 }
