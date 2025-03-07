@@ -6,52 +6,49 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:51:38 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/04 23:44:39 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/07 00:23:21 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int get_max_bits(t_node *stack)
+static int	get_max_bits(t_list **stack)
 {
-    t_node *head;
-    int max;
-    int max_bits;
+	t_list	*head;
+	int		max;
+	int		max_bits;
 
-    if (!stack)
-        return (0);
-
-    head = stack;
-    max = head->index;
-    max_bits = 0;
-    
-    while (head)
-    {
-        if (head->index > max)
-            max = head->index;
-        head = head->next;
-    }
-    
-    while ((max >> max_bits) != 0)
-        max_bits++;
-    
-    return (max_bits);
+	head = *stack;
+	max = head->index;
+	max_bits = 0;
+	while (head)
+	{
+		if (head->index > max)
+			max = head->index;
+		head = head->next;
+	}
+	while ((max >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
 }
 
-int	is_stack_sorted(t_node *stack)
+int	is_sorted(t_list **stack)
 {
-    while (stack && stack->next)
-    {
-        if (stack->value > stack->next->value)
-            return (0);
-        stack = stack->next;
-    }
-    return (1);
+	t_list	*head;
+
+	head = *stack;
+	while (head && head->next)
+	{
+		if (head->content > head->next->content)
+			return (0);
+		head = head->next;
+	}
+	return (1);
 }
 
-void	radix_sort(t_node **stack_a, t_node **stack_b)
+void	radix_sort(t_list **stack_a, t_list **stack_b)
 {
-	t_node	*head_a;
+	t_list	*head_a;
 	int		i;
 	int		j;
 	int		size;

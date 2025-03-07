@@ -1,28 +1,33 @@
-
 NAME = push_swap
 
 OBJ_DIR = obj
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS =  $(wildcard src/*.c)
-
+SRCS = $(wildcard src/*.c)
 OBJ = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(LIBFT_DIR)
 
 $(OBJ_DIR)/%.o: src/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: ${NAME}
+all: $(LIBFT) $(NAME)
 
-${NAME}: ${OBJ}
-	${CC} ${CFLAGS} ${OBJ} -o ${NAME}
+$(LIBFT):
+	make -C $(LIBFT_DIR) bonus
+
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 clean:
-	rm -f ${OBJ}
+	rm -f $(OBJ)
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
