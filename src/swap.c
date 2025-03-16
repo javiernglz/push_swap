@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:04:30 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 01:05:33 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:30:18 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,22 @@ int	swap(t_list **stack)
 		return (-1);
 	head = *stack;
 	next = head->next;
-	if (!head && !next)
-		ft_error("Error occured while swapping!");
-	tmp_val = head->content;
+	if (!head || !next) // Corregido && -> ||
+		ft_error("Error occurred while swapping!");
+
+	// Convertir void* a int* y obtener los valores
+	tmp_val = *(int *)(head->content);
+	*(int *)(head->content) = *(int *)(next->content);
+	*(int *)(next->content) = tmp_val;
+
+	// Intercambiar índices normalmente
 	tmp_index = head->index;
-	head->content = next->content;
 	head->index = next->index;
-	next->content = tmp_val;
 	next->index = tmp_index;
+
 	return (0);
 }
+
 
 int	sa(t_list **stack_a)
 {

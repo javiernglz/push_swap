@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:41:42 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 01:02:24 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/16 18:01:37 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int main(int argc, char **argv)
     if (argc < 2)
     {
         printf("Uso: %s <números a ordenar>\n", argv[0]);
-        return 1;
+        return (1);
     }
 
     stack_a = NULL;
@@ -119,27 +119,39 @@ int main(int argc, char **argv)
     // Inicializa la pila A
     initStack(&stack_a, argc, argv);
 
+    // Verifica si hubo un error en la inicialización
+    if (!stack_a)
+    {
+        printf("Error al inicializar la pila\n");
+        return (1);
+    }
+
     // Imprime la pila A antes de ordenar
     printf("Pila A antes de ordenar:\n");
     print_stack(stack_a);
 
-    // Indexa la pila A
+    // Indexa la pila A antes de ordenar
     index_stack(&stack_a);
+	printf("¿Está ordenada?: %d\n", is_sorted(&stack_a));
+	printf("Ejecutando radix_sort...\n");
+	
+	printf("Pila A después de indexar:\n");
+	print_stack_index(stack_a);  // Función que imprimirá índices
 
-    // Aquí puedes agregar el código para ordenar las pilas (como el algoritmo de push_swap)
-    // Ejemplo: simple_sort(stack_a, stack_b);
+    // Ordena la pila usando Radix Sort
+    radix_sort(&stack_a, &stack_b);
 
     // Imprime la pila A después de ordenar
     printf("Pila A después de ordenar:\n");
     print_stack(stack_a);
 
-    // Imprime la pila B (si se usó)
+    // Imprime la pila B (debería estar vacía después del ordenamiento)
     printf("Pila B:\n");
     print_stack(stack_b);
 
-    // Liberar la memoria de las pilas (implementa tu función de liberar las pilas)
-    // free_stack(stack_a);
-    // free_stack(stack_b);
+    // Liberar la memoria de las pilas
+    free_stack(&stack_a);
+    free_stack(&stack_b);
 
-    return 0;
+    return (0);
 }

@@ -86,34 +86,29 @@ int	get_distance(t_list *stack, int value)
 	return (-1);
 }
 
-void	ft_check_args(int argc, char **argv)
+void ft_check_args(int argc, char **argv)
 {
-	int		i;
-	long	tmp;
-	char	**args;	
+    int i;
+    long tmp;
+    char **args;    
 
-	i = 0;
-	if (argc == 2)
-		args = ft_split(argv[1], ' ');
-	else
-	{
-		i = 1;
-		args = argv;
-	}
-	while (args[i])
-	{
-		tmp = ft_atoi(args[i]);
-		if (!ft_isnum(args[i]))
-			ft_error("Error");
-		if (ft_contains(tmp, args, i))
-			ft_error("Error");
-		if (tmp < -2147483648 || tmp > 2147483647)
-			ft_error("Error");
-		i++;
-	}
-	if (argc == 2)
-		free(args);
+    if (argc == 2)
+        args = ft_split(argv[1], ' ');
+    else
+        args = argv + 1; // Evita el primer argumento (nombre del programa)
+
+    i = 0;
+    while (args[i])
+    {
+        tmp = ft_atoi(args[i]);
+        if (!ft_isnum(args[i]) || ft_contains(tmp, args, i) || tmp < -2147483648 || tmp > 2147483647)
+            ft_error("Error");
+        i++;
+    }
+    if (argc == 2)
+        ft_free(args);
 }
+
 
 void	ft_error(char *msg)
 {
@@ -132,40 +127,62 @@ void	ft_free(char **str)
 		free(str[i--]);
 }
 
-static t_list	*get_next_min(t_list **stack)
+static t_list *get_next_min(t_list **stack)
 {
-	t_list	*head;
-	t_list	*min;
-	int		has_min;
+    t_list *head = *stack;
+    t_list *min = NULL;
 
-	min = NULL;
-	has_min = 0;
-	head = *stack;
-	if (head)
-	{
-		while (head)
-		{
-			if ((head->index == -1) && (!has_min || head->content < min->content))
-			{
-				min = head;
-				has_min = 1;
-			}
-			head = head->next;
-		}
-	}
-	return (min);
+    printf("\nBuscando el siguiente mínimo...\n");
+
+    while (head)
+    {
+        printf("Nodo actual - Valor: %d, Índice: %d\n", *((int *)head->content), head->index);
+
+        if (head->index == -1)
+        {
+            if (!min || *((int *)head->content) < *((int *)min->content))
+            {
+                min = head;
+                printf("Nuevo mínimo encontrado: %d\n", *((int *)min->content));
+            }
+        }
+        head = head->next;
+    }
+
+    return min;
 }
 
-void	index_stack(t_list **stack)
-{
-	t_list	*head;
-	int		index;
 
-	index = 0;
-	head = get_next_min(stack);
-	while (head)
-	{
-		head->index = index++;
-		head = get_next_min(stack);
-	}
+void index_stack(t_list **stack)
+{
+    t_list *head;
+    int index = 0;
+
+    // Inicializar todos los índices a -1
+    head = *stack;
+    while (head)
+    {
+        head->index = -1;
+        head = head->next;
+    }
+
+    printf("\nAsignando índices...\n");
+
+    while ((head = get_next_min(stack))) 
+    {
+        head->index = index++;
+        printf("Asignado índice %d al valor %d\n", head->index, *((int *)head->content));
+    }
+}
+
+
+
+void print_stack_index(t_list *stack)
+{
+    while (stack)
+    {
+        printf("Valor: %d, Índice: %d\n", *((int *)stack->content), stack->index);
+        stack = stack->next;
+    }
+    printf("\n");
 }

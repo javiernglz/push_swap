@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:33:52 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 01:05:48 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:52:57 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pb(t_list **a, t_list **b)
 }
  */
 
- int	push(t_list **stack_to, t_list **stack_from)
+/*  int	push(t_list **stack_to, t_list **stack_from)
 {
 	t_list	*tmp;
 	t_list	*head_to;
@@ -61,6 +61,20 @@ void	pb(t_list **a, t_list **b)
 		tmp->next = head_to;
 		*stack_to = tmp;
 	}
+	return (0);
+} */
+int	push(t_list **stack_to, t_list **stack_from)
+{
+	t_list	*tmp;
+
+	if (ft_lstsize(*stack_from) == 0)
+		return (-1);
+	tmp = *stack_from;  // Guardamos el nodo a mover
+	*stack_from = (*stack_from)->next;  // Movemos el puntero de stack_from
+
+	tmp->next = *stack_to;  // Insertamos al inicio de stack_to
+	*stack_to = tmp;
+
 	return (0);
 }
 

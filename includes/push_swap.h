@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:39:06 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 01:07:15 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/16 18:02:15 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ int		stack_size(t_list *stack);
 
 void	index_stack(t_list **stack);
 void	ft_free(char **str);
+
+void print_stack_index(t_list *stack);
 
 #endif
