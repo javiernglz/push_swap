@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:33:52 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 12:43:03 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:30:01 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ int	push(t_list **stack_to, t_list **stack_from)
 
 	if (ft_lstsize(*stack_from) == 0)
 		return (-1);
-	tmp = *stack_from;  // Guardamos el nodo a mover
-	*stack_from = (*stack_from)->next;  // Movemos el puntero de stack_from
-
-	tmp->next = *stack_to;  // Insertamos al inicio de stack_to
+	tmp = *stack_from;
+	*stack_from = (*stack_from)->next;
+	tmp->next = *stack_to;
 	*stack_to = tmp;
 
 	return (0);

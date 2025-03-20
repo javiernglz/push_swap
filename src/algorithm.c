@@ -6,13 +6,13 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:01:28 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 00:31:51 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:14:04 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	get_min(t_list **stack, int val)
+static int	find_smallest_index(t_list **stack, int val)
 {
 	t_list	*head;
     int		min;
@@ -35,8 +35,8 @@ static void sort_3(t_list **stack_a)
 	int		next_min;
 
 	head = *stack_a;
-	min = get_min(stack_a, -1);
-	next_min = get_min(stack_a, min);
+	min = find_smallest_index(stack_a, -1);
+	next_min = find_smallest_index(stack_a, min);
 	if (is_sorted(stack_a))
 		return ;
 	if (head->index == min && head->next->index != next_min)
@@ -71,7 +71,7 @@ static void sort_4_5(t_list **t_list_a, t_list **t_list_b)
 	
     while (stack_size(*t_list_a) > 3)
     {
-        distance = get_distance(*t_list_a, get_min(t_list_a, -1));
+        distance = find_index_position(*t_list_a, find_smallest_index(t_list_a, -1));
         if (distance == 1)
             ra(t_list_a);
         else if (distance == 2)

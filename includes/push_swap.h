@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:39:06 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 13:58:51 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:15:48 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,12 @@
 # include <unistd.h>
 # include <stdio.h>
 
-/* typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list; */
-
 typedef struct s_stack
 {
 	t_list	*a;
 	t_list	*b;
 }	t_stack;
 
-
-int		get_distance(t_list *stack, int value);
-void	print_stack(t_list *stack);
-void	make_top(t_list **stack, int distance);
-void	ft_check_args(int argc, char **argv);
-void	ft_error(char *msg);
-
-void 	free_stack(t_list **stack);
-
-/* void	push(t_list **src, t_list **dst);
-void	swap(t_list **stack);
-void	rotate(t_list **stack);
-void	reverse_rotate(t_list **stack);
-
-void	pa(t_list **a, t_list **b);
-void	pb(t_list **a, t_list **b);
-void	sa(t_list **a);
-void	sb(t_list **b);
-void	ss(t_list **a, t_list **b);
-void	ra(t_list **a);
-void	rb(t_list **b);
-void	rr(t_list **a, t_list **b);
-void	rra(t_list **a);
-void	rrb(t_list **b);
-void	rrr(t_list **a, t_list **b); */
 typedef struct s_stacks
 {
 	int		*a;
@@ -64,6 +33,13 @@ typedef struct s_stacks
 	char	*join_args;
 }			t_stacks;
 
+int		find_index_position(t_list *stack, int value);
+void	print_stack(t_list *stack);
+void	arguments(int argc, char **argv);
+
+void 	free_stack(t_list **stack);
+
+//Push Swap movements functions
 int		swap(t_list **stack);
 int		push(t_list **stack_to, t_list **stack_from);
 int		rotate(t_list **stack);
@@ -81,9 +57,12 @@ int		rra(t_list **stack_a);
 int		rrb(t_list **stack_b);
 int		rrr(t_list **stack_a, t_list **stack_b);
 
-void	radix_sort(t_list **stack_a, t_list **stack_b);
+//Radix functions
 int		is_sorted(t_list **stack);
+void	radix_sort(t_list **stack_a, t_list **stack_b);
+void	sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j);
 
+//Algorithm
 void	small_sort(t_list **t_list_a, t_list **t_list_b);
 int		stack_size(t_list *stack);
 
@@ -91,6 +70,5 @@ void	index_stack(t_list **stack);
 void	ft_free(char **str);
 
 void print_stack_index(t_list *stack);
-void radix_sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:51:38 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 14:22:03 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:34:33 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_sorted(t_list **stack)
 	return (1);
 }
 
-void radix_sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j)
+void sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j)
 {
 	int size = ft_lstsize(*stack_b);
  
@@ -49,7 +49,6 @@ void radix_sort(t_list **stack_a, t_list **stack_b)
 {
 	int j, bit_size, size;
  
-	// Determinar el número de bits necesarios
 	bit_size = 0;
 	size = ft_lstsize(*stack_a);
 
@@ -68,11 +67,8 @@ void radix_sort(t_list **stack_a, t_list **stack_b)
 			else
 				ra(stack_a);
 		}
-		// Llamamos a la función que devuelve los números de `b` a `a`
-		radix_sort_stack_b(stack_a, stack_b, bit_size, j + 1);
+		sort_stack_b(stack_a, stack_b, bit_size, j + 1);
 	}
- 
-	// Asegurar que todos los elementos vuelvan a `a`
 	while (*stack_b)
 		pa(stack_a, stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:41:42 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 12:35:12 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:39:27 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void initStack(t_list **stack, int argc, char **argv)
 		int *value = malloc(sizeof(int));
 		if (!value)
 		{
-			printf("Error de memoria\n");
+			printf("Memory Error\n");
 			return;
 		}
 		*value = ft_atoi(argv[i]);
 		new = ft_lstnew(value);
 				if (!new)
         {
-            printf("Error al crear nodo\n");
+            printf("Error creating the node\n");
             return;
         }
         ft_lstadd_back(stack, new);
@@ -55,12 +55,11 @@ int main(int argc, char **argv)
 
     if (!stack_a)
     {
-        printf("Error al inicializar la pila\n");
+        printf("Error initializing the stack\n");
         return (1);
     }
 
     index_stack(&stack_a);
-	print_stack_index(stack_a);
     radix_sort(&stack_a, &stack_b);
     print_stack(stack_a);
     print_stack(stack_b);
