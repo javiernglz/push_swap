@@ -6,31 +6,11 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:51:38 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 13:46:11 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:22:03 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static int	get_max_bits(t_list **stack)
-{
-	t_list	*head;
-	int		max;
-	int		max_bits;
-
-	head = *stack;
-	max = head->index;
-	max_bits = 0;
-	while (head)
-	{
-		if (head->index > max)
-			max = head->index;
-		head = head->next;
-	}
-	while ((max >> max_bits) != 0)
-		max_bits++;
-	return (max_bits);
-}
 
 int	is_sorted(t_list **stack)
 {
@@ -46,41 +26,53 @@ int	is_sorted(t_list **stack)
 	return (1);
 }
 
+void radix_sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j)
+{
+	int size = ft_lstsize(*stack_b);
+ 
+	while (size-- && j <= bit_size && !is_sorted(stack_a))
+	{
+		if ((((*stack_b)->index >> j) & 1) == 0)
+			rb(stack_b);
+		else
+			pa(stack_a, stack_b);
+	}
+ 
+	if (is_sorted(stack_a))
+	{
+		while (*stack_b)
+			pa(stack_a, stack_b);
+	}
+}
+ 
 void radix_sort(t_list **stack_a, t_list **stack_b)
 {
-    t_list  *head_a;
-    int     i, j, size, max_bits;
+	int j, bit_size, size;
+ 
+	// Determinar el número de bits necesarios
+	bit_size = 0;
+	size = ft_lstsize(*stack_a);
 
-    i = 0;
-    head_a = *stack_a;
-    size = ft_lstsize(head_a);
-    max_bits = get_max_bits(stack_a);
-
-    while (i < max_bits)
-    {
-        j = 0;
-
-        while (j++ < size)
-        {
-            head_a = *stack_a;
-            if (((head_a->index >> i) & 1) == 1)
-            {
-                ra(stack_a);
-            }
-            else
-            {
-                pb(stack_a, stack_b);
-            }
-        }
-
-        print_stack_index(*stack_a);
-        print_stack_index(*stack_b);
-
-        while (ft_lstsize(*stack_b) != 0)
-        {
-            pa(stack_a, stack_b);
-        }
-
-        i++;
-    }
+	while (size > 1 && ++bit_size)
+		size /= 2;
+ 
+	j = -1;
+	while (++j <= bit_size)
+	{
+		size = ft_lstsize(*stack_a);
+ 
+		while (size-- && !is_sorted(stack_a))
+		{
+			if ((((*stack_a)->index >> j) & 1) == 0)
+				 pb(stack_a, stack_b);
+			else
+				ra(stack_a);
+		}
+		// Llamamos a la función que devuelve los números de `b` a `a`
+		radix_sort_stack_b(stack_a, stack_b, bit_size, j + 1);
+	}
+ 
+	// Asegurar que todos los elementos vuelvan a `a`
+	while (*stack_b)
+		pa(stack_a, stack_b);
 }
