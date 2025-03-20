@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:39:06 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 23:31:37 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/21 00:34:52 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		find_index_position(t_list *stack, int value);
 
 //Utils functions
 void	print_stack(t_list *stack);
-void	arguments(int argc, char **argv);
 void	ft_free(char **str);
+long	ft_atol(const char *str);
 
 //Push Swap movements functions
 int		swap(t_list **stack);
@@ -64,5 +64,10 @@ int		rr(t_list **stack_a, t_list **stack_b);
 int		rra(t_list **stack_a);
 int		rrb(t_list **stack_b);
 int		rrr(t_list **stack_a, t_list **stack_b);
+
+//Error arguments
+int		is_valid_number(char *num);
+int		has_duplicates(char **args, int index, long num);
+void	arguments(int argc, char **argv);
 
 #endif
