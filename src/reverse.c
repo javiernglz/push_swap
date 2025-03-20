@@ -6,50 +6,11 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:33:55 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/07 01:06:18 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:42:55 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-/* void	reverse_rotate(t_list	**stack)
-{
-	t_list	*prev;
-	t_list	*last;
-
-	if (!stack || !(*stack) || !((*stack)->next))
-		return;
-	prev = NULL;
-	last = *stack;
-	while (last->next)
-	{
-		prev = last;
-		last = last->next;
-	}
-	if (prev)
-		prev->next = NULL;
-	last->next = *stack;
-	*stack = last;
-}
-
-void	rra(t_list **a)
-{
-	reverse_rotate(a);
-	write(1, "rra\n", 4);
-}
-
-void	rrb(t_list **b)
-{
-	reverse_rotate(b);
-	write(1, "rrb\n", 4);
-}
-
-void	rrr(t_list **a, t_list **b)
-{
-	reverse_rotate(a);
-	reverse_rotate(b);
-	write(1, "rrr\n", 4);
-} */
 
 int	reverseRotate(t_list **stack)
 {

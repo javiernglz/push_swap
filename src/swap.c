@@ -6,45 +6,12 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:04:30 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/16 17:30:18 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:42:40 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-/* 
-void	swap(t_list **stack)
-{
-	t_list	*first;
-	t_list	*second;
 
-	if (!stack || !(*stack) || !((*stack)->next))
-		return;
-	first = *stack;
-	second = (*stack)->next;
-	first->next = second->next;
-	second->next = first;
-	*stack = second;
-}
-
-void	sa(t_list **a)
-{
-	swap(a);
-	write(1, "sa\n", 3);
-}
-
-void	sb(t_list **b)
-{
-	swap(b);
-	write(1, "sb\n", 3);
-}
-
-void	ss(t_list **a, t_list **b)
-{
-	swap(a);
-	swap(b);
-	write(1, "ss\n", 3);
-}
- */
 int	swap(t_list **stack)
 {
 	t_list	*head;
