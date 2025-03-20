@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:39:06 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/16 18:02:15 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:35:31 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ void	rr(t_list **a, t_list **b);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b); */
+typedef struct s_stacks
+{
+	int		*a;
+	int		*b;
+	int		a_size;
+	int		b_size;
+	char	*join_args;
+}			t_stacks;
 
 int		swap(t_list **stack);
 int		push(t_list **stack_to, t_list **stack_from);
