@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:51:38 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/16 18:02:34 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:38:22 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,24 @@ void radix_sort(t_list **stack_a, t_list **stack_b)
     size = ft_lstsize(head_a);
     max_bits = get_max_bits(stack_a);
 
-    printf("Bits máximos: %d\n", max_bits);
-
     while (i < max_bits)
     {
         j = 0;
-        printf("Iteración %d:\n", i);
 
         while (j++ < size)
         {
             head_a = *stack_a;
             if (((head_a->index >> i) & 1) == 1)
             {
-                printf("Moviendo arriba: %d\n", head_a->index);
                 ra(stack_a);
             }
             else
             {
-                printf("Moviendo a B: %d\n", head_a->index);
                 pb(stack_a, stack_b);
             }
         }
 
-        printf("Pila A después de pasar bits:\n");
         print_stack_index(*stack_a);
-        printf("Pila B:\n");
         print_stack_index(*stack_b);
 
         while (ft_lstsize(*stack_b) != 0)

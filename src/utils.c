@@ -44,10 +44,10 @@ void	print_stack(t_list *stack)
 {
 	while (stack)
 	{
-		printf("%d ", *((int *)stack->content));
+		//printf("%d ", *((int *)stack->content));
 		stack = stack->next;
 	}
-	printf("\n");
+	//printf("\n");
 }
 
 void	make_top(t_list **stack, int distance)
@@ -95,7 +95,7 @@ void ft_check_args(int argc, char **argv)
     if (argc == 2)
         args = ft_split(argv[1], ' ');
     else
-        args = argv + 1; // Evita el primer argumento (nombre del programa)
+        args = argv + 1;
 
     i = 0;
     while (args[i])
@@ -108,7 +108,6 @@ void ft_check_args(int argc, char **argv)
     if (argc == 2)
         ft_free(args);
 }
-
 
 void	ft_error(char *msg)
 {
@@ -132,18 +131,16 @@ static t_list *get_next_min(t_list **stack)
     t_list *head = *stack;
     t_list *min = NULL;
 
-    printf("\nBuscando el siguiente mínimo...\n");
-
     while (head)
     {
-        printf("Nodo actual - Valor: %d, Índice: %d\n", *((int *)head->content), head->index);
+        //printf("Nodo actual - Valor: %d, Índice: %d\n", *((int *)head->content), head->index);
 
         if (head->index == -1)
         {
             if (!min || *((int *)head->content) < *((int *)min->content))
             {
                 min = head;
-                printf("Nuevo mínimo encontrado: %d\n", *((int *)min->content));
+                //printf("Nuevo mínimo encontrado: %d\n", *((int *)min->content));
             }
         }
         head = head->next;
@@ -158,7 +155,6 @@ void index_stack(t_list **stack)
     t_list *head;
     int index = 0;
 
-    // Inicializar todos los índices a -1
     head = *stack;
     while (head)
     {
@@ -166,23 +162,19 @@ void index_stack(t_list **stack)
         head = head->next;
     }
 
-    printf("\nAsignando índices...\n");
-
     while ((head = get_next_min(stack))) 
     {
         head->index = index++;
-        printf("Asignado índice %d al valor %d\n", head->index, *((int *)head->content));
+       // printf("Asignado índice %d al valor %d\n", head->index, *((int *)head->content));
     }
 }
-
-
 
 void print_stack_index(t_list *stack)
 {
     while (stack)
     {
-        printf("Valor: %d, Índice: %d\n", *((int *)stack->content), stack->index);
+        //printf("Valor: %d, Índice: %d\n", *((int *)stack->content), stack->index);
         stack = stack->next;
     }
-    printf("\n");
+    //printf("\n");
 }

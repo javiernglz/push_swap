@@ -6,76 +6,11 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:41:42 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/16 18:01:37 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:35:12 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-/* static void	initStack(t_list **stack, int argc, char **argv)
-{
-	t_list	*new;
-	char	**args;
-	int		i;
-
-	i = 0;
-	if (argc == 2)
-		args = ft_split(argv[1], ' ');
-	else
-	{
-		i = 1;
-		args = argv;
-	}
-	while (args[i])
-	{
-		int *value = malloc(sizeof(int));
-		if (!value)
-		{
-			ft_putstr_fd("Error: No se pudo asignar memoria.\n", 2);
-			exit(1);
-		}
-		*value = ft_atoi(args[i]);
-		new = ft_lstnew(value);
-		ft_lstadd_back(stack, new);
-		i++;
-	}
-	index_stack(stack);
-	if (argc == 2)
-		ft_free(args);
-}
-
-static void	sort_stack(t_list **stack_a, t_list **stack_b)
-{
-	if (ft_lstsize(*stack_a) <= 5)
-		small_sort(stack_a, stack_b);
-	else
-		radix_sort(stack_a, stack_b);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	**stack_a;
-	t_list	**stack_b;
-
-	if (argc < 2)
-		return (-1);
-	ft_check_args(argc, argv);
-	stack_a = (t_list **)malloc(sizeof(t_list));
-	stack_b = (t_list **)malloc(sizeof(t_list));
-	*stack_a = NULL;
-	*stack_b = NULL;
-	initStack(stack_a, argc, argv);
-	if (is_sorted(stack_a))
-	{
-		free_stack(stack_a);
-		free_stack(stack_b);
-		return (0);
-	}
-	sort_stack(stack_a, stack_b);
-	free_stack(stack_a);
-	free_stack(stack_b);
-	return (0);
-} */
 
 static void initStack(t_list **stack, int argc, char **argv)
 {
@@ -85,20 +20,20 @@ static void initStack(t_list **stack, int argc, char **argv)
     *stack = NULL;
     for (i = 1; i < argc; i++)
     {
-		int *value = malloc(sizeof(int));  // Asegúrate de usar malloc para almacenar un entero
+		int *value = malloc(sizeof(int));
 		if (!value)
 		{
 			printf("Error de memoria\n");
 			return;
 		}
-		*value = ft_atoi(argv[i]);  // Almacenar el valor entero en el puntero
-		new = ft_lstnew(value);  // Pasar el puntero a la función
+		*value = ft_atoi(argv[i]);
+		new = ft_lstnew(value);
 				if (!new)
         {
             printf("Error al crear nodo\n");
             return;
         }
-        ft_lstadd_back(stack, new);  // Agregar al final de la pila
+        ft_lstadd_back(stack, new);
     }
 }
 
@@ -116,40 +51,20 @@ int main(int argc, char **argv)
     stack_a = NULL;
     stack_b = NULL;
 
-    // Inicializa la pila A
     initStack(&stack_a, argc, argv);
 
-    // Verifica si hubo un error en la inicialización
     if (!stack_a)
     {
         printf("Error al inicializar la pila\n");
         return (1);
     }
 
-    // Imprime la pila A antes de ordenar
-    printf("Pila A antes de ordenar:\n");
-    print_stack(stack_a);
-
-    // Indexa la pila A antes de ordenar
     index_stack(&stack_a);
-	printf("¿Está ordenada?: %d\n", is_sorted(&stack_a));
-	printf("Ejecutando radix_sort...\n");
-	
-	printf("Pila A después de indexar:\n");
-	print_stack_index(stack_a);  // Función que imprimirá índices
-
-    // Ordena la pila usando Radix Sort
+	print_stack_index(stack_a);
     radix_sort(&stack_a, &stack_b);
-
-    // Imprime la pila A después de ordenar
-    printf("Pila A después de ordenar:\n");
     print_stack(stack_a);
-
-    // Imprime la pila B (debería estar vacía después del ordenamiento)
-    printf("Pila B:\n");
     print_stack(stack_b);
 
-    // Liberar la memoria de las pilas
     free_stack(&stack_a);
     free_stack(&stack_b);
 
