@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 22:28:46 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 23:13:54 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/21 00:57:40 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ void index_stack(t_list **stack)
 
 int	find_index_position(t_list *stack, int value)
 {
-	int	distance;
+	int	dist;
 
-	distance = 0;
+	dist = 0;
 	while (stack)
 	{
 		if (stack->index == value)
-			return (distance);
+			return (dist);
 		stack = stack->next;
-		distance++;
+		dist++;
 	}
 	return (-1);
 }

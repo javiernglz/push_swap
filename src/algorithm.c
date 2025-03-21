@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:01:28 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/20 23:14:04 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/21 00:58:09 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,56 +30,51 @@ static int	find_smallest_index(t_list **stack, int val)
 
 static void sort_3(t_list **stack_a)
 {
-	t_list	*head;
-	int		min;
-	int		next_min;
+    t_list  *head;
+    int     min;
+    int     next_min;
 
-	head = *stack_a;
-	min = find_smallest_index(stack_a, -1);
-	next_min = find_smallest_index(stack_a, min);
-	if (is_sorted(stack_a))
-		return ;
-	if (head->index == min && head->next->index != next_min)
-	{
-		ra(stack_a);
-		sa(stack_a);
-		rra(stack_a);
-	}
-	else if (head->index == next_min)
-	{
-		if (head->next->index == min)
-			sa(stack_a);
-		else
-			rra(stack_a);
-	}
-	else
-	{
-		if (head->next->index == min)
-			ra(stack_a);
-		else
-		{
-			sa(stack_a);
-			rra(stack_a);
-		}
-	}
+    if (is_sorted(stack_a))
+        return ;
+    head = *stack_a;
+    min = find_smallest_index(stack_a, -1);
+    next_min = find_smallest_index(stack_a, min);
+    if (head->index == min && head->next->index != next_min)
+    {
+        ra(stack_a);
+        sa(stack_a);
+        rra(stack_a);
+    }
+    else if (head->index == next_min && head->next->index != min)
+        rra(stack_a);
+    else if (head->index != min)
+    {
+        if (head->next->index == min)
+            ra(stack_a);
+        else
+        {
+            sa(stack_a);
+            rra(stack_a);
+        }
+    }
 }
 
 static void sort_4_5(t_list **t_list_a, t_list **t_list_b)
 {
-    int distance;
+    int dist;
 	int size = 0;
 	
     while (stack_size(*t_list_a) > 3)
     {
-        distance = find_index_position(*t_list_a, find_smallest_index(t_list_a, -1));
-        if (distance == 1)
+        dist = find_index_position(*t_list_a, find_smallest_index(t_list_a, -1));
+        if (dist == 1)
             ra(t_list_a);
-        else if (distance == 2)
+        else if (dist == 2)
         {
             ra(t_list_a);
             ra(t_list_a);
         }
-        else if (distance == 3 && size == 5)
+        else if (dist == 3 && size == 5)
         {
             rra(t_list_a);
             rra(t_list_a);
@@ -105,7 +100,7 @@ void	small_sort(t_list **stack_a, t_list **stack_b)
 		sa(stack_a);
 	else if (size == 3)
 		sort_3(stack_a);
-	else if (size == 4)
+	else if (size == 4 || size == 5)
 		sort_4_5(stack_a, stack_b);
 }
 

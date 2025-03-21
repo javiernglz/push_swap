@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:41:42 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/21 00:42:44 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/21 00:52:43 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		error_exit();
 	index_stack(&stack_a);
-	radix_sort(&stack_a, &stack_b);
+	if (stack_size(stack_a) <= 5)
+		small_sort(&stack_a, &stack_b);
+	else
+		radix_sort(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
