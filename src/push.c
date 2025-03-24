@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:33:52 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/21 00:47:25 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:25:40 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	push(t_list **stack_to, t_list **stack_from)
 	*stack_from = (*stack_from)->next;
 	tmp->next = *stack_to;
 	*stack_to = tmp;
-
 	return (0);
 }
 

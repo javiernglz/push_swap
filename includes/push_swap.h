@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:39:06 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/23 20:24:01 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:32:39 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int		is_sorted(t_list **stack);
 void	radix_sort(t_list **stack_a, t_list **stack_b);
 void	sort_stack_b(t_list **stack_a, t_list **stack_b, int bit_size, int j);
 
-
 //Stack Utils functions
-void 	free_stack(t_list **stack);
+void	free_stack(t_list **stack);
 void	index_stack(t_list **stack);
 int		find_index_position(t_list *stack, int value);
 
@@ -52,7 +51,7 @@ long	ft_atol(const char *str);
 int		swap(t_list **stack);
 int		push(t_list **stack_to, t_list **stack_from);
 int		rotate(t_list **stack);
-int		reverseRotate(t_list **stack);
+int		reverse_rotate(t_list **stack);
 
 int		sa(t_list **stack_a);
 int		sb(t_list **stack_b);
@@ -68,7 +67,7 @@ int		rrr(t_list **stack_a, t_list **stack_b);
 
 //Error arguments
 int		is_valid_number(char *num);
-int		has_duplicates(char **args, int index, long num);
+int		has_duplic(char **args, int index, long num);
 void	arguments(int argc, char **argv);
 
 #endif

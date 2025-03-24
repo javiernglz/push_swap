@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 00:16:22 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/21 00:22:24 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:51:29 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_valid_number(char *num)
 	return (1);
 }
 
-int	has_duplicates(char **args, int index, long num)
+int	has_duplic(char **args, int index, long num)
 {
 	int	j;
 
@@ -46,16 +46,20 @@ int	has_duplicates(char **args, int index, long num)
 
 void	arguments(int argc, char **argv)
 {
-	int		i;
 	long	tmp;
 	char	**args;
+	int		i;
 
-	args = (argc == 2) ? ft_split(argv[1], ' ') : argv + 1;
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args = argv + 1;
 	i = 0;
 	while (args[i])
 	{
-		if (!is_valid_number(args[i]) || (tmp = ft_atoi(args[i])) < -2147483648
-			|| tmp > 2147483647 || has_duplicates(args, i, tmp))
+		tmp = ft_atoi(args[i]);
+		if (!is_valid_number(args[i]) || tmp < -2147483648
+			|| tmp > 2147483647 || has_duplic(args, i, tmp))
 		{
 			write(2, "Error\n", 6);
 			exit(1);

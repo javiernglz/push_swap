@@ -6,7 +6,7 @@
 /*   By: frnavarr <frnavarr@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:41:42 by frnavarr          #+#    #+#             */
-/*   Updated: 2025/03/21 00:52:43 by frnavarr         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:25:30 by frnavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_list	*create_node(char *arg, char **argv, int index)
 	if (!is_valid_number(arg))
 		error_exit();
 	num = ft_atol(arg);
-	if (num < -2147483648 || num > 2147483647 || has_duplicates(argv, index, num))
+	if (num < -2147483648 || num > 2147483647 || has_duplic(argv, index, num))
 		error_exit();
 	value = malloc(sizeof(int));
 	if (!value)
@@ -78,4 +78,3 @@ int	main(int argc, char **argv)
 	free_stack(&stack_b);
 	return (0);
 }
-
